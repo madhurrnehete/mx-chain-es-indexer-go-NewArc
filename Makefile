@@ -1,10 +1,12 @@
 TESTS_TO_RUN := $(shell go list ./... | grep -v integrationtests | grep -v mock)
-ELASTIC_PASSWORD = elastic
+
 
 
 test:
 	@echo "  >  Running unit tests"
 	go test -cover -race -coverprofile=coverage.txt -covermode=atomic -v ${TESTS_TO_RUN}
+
+ELASTIC_PASSWORD = elastic
 
 integration-tests:
 	@echo " > Running integration tests"
