@@ -1,5 +1,5 @@
 TESTS_TO_RUN := $(shell go list ./... | grep -v integrationtests | grep -v mock)
-ELASTIC_PASSWORD ?= elastic
+ELASTIC_PASSWORD = elastic
 
 
 test:
@@ -31,7 +31,7 @@ integration-tests-open-search:
 	@echo " > Running integration tests open search"
 	cd scripts && /bin/bash script.sh start_open_search ${OPEN_VERSION}
 	go test -v ./integrationtests -tags integrationtests
-	cd scripts && /bin/bash script.sh delete
+	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh delete
 	cd scripts && /bin/bash script.sh stop_open_search
 
 INDEXER_IMAGE_NAME="elasticindexer"
