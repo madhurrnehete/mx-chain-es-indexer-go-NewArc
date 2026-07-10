@@ -8,7 +8,7 @@ test:
 
 integration-tests:
 	@echo " > Running integration tests"
-	cd scripts && /bin/bash script.sh start ${ES_VERSION}
+	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh start ${ES_VERSION}
 	go test -v ./integrationtests -tags integrationtests
 	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh delete
 	cd scripts && /bin/bash script.sh stop
@@ -31,7 +31,7 @@ integration-tests-open-search:
 	@echo " > Running integration tests open search"
 	cd scripts && /bin/bash script.sh start_open_search ${OPEN_VERSION}
 	go test -v ./integrationtests -tags integrationtests
-	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh delete
+	cd scripts && /bin/bash script.sh delete
 	cd scripts && /bin/bash script.sh stop_open_search
 
 INDEXER_IMAGE_NAME="elasticindexer"
