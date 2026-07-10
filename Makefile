@@ -8,7 +8,7 @@ test:
 
 integration-tests:
 	@echo " > Running integration tests"
-	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh start ${ES_VERSION}
+	cd scripts && /bin/bash script.sh start ${ES_VERSION}
 	go test -v ./integrationtests -tags integrationtests
 	export ELASTIC_PASSWORD=${ELASTIC_PASSWORD} && cd scripts && /bin/bash script.sh delete
 	cd scripts && /bin/bash script.sh stop
